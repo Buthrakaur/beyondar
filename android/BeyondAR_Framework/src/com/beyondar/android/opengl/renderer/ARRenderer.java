@@ -58,6 +58,7 @@ import com.beyondar.android.util.math.geom.Ray;
 import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.BeyondarObjectList;
 import com.beyondar.android.world.GeoObject;
+import com.beyondar.android.world.GeoPoint;
 import com.beyondar.android.world.World;
 
 // Some references:
@@ -429,19 +430,19 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 	/**
 	 * Convert the geolocation to gl points representation.
 	 * 
-	 * @param geoObject
+	 * @param location
 	 *            The {@link com.beyondar.android.world.GeoObject GeoObject} to
 	 *            be processed.
 	 * @param out
 	 *            Where the results be stored.
 	 */
-	protected void convertGPStoPoint3(GeoObject geoObject, Point3 out) {
+	protected void convertGPStoPoint3(GeoPoint location, Point3 out) {
 		float x, z, y;
-		x = (float) (Distance.fastConversionGeopointsToMeters(geoObject.getLongitude()
+		x = (float) (Distance.fastConversionGeopointsToMeters(location.longitude
 				- mWorld.getLongitude()) / mDistanceFactor);
-		z = (float) (Distance.fastConversionGeopointsToMeters(geoObject.getAltitude() 
+		z = (float) (Distance.fastConversionGeopointsToMeters(location.altitude
 				- mWorld.getAltitude()) / mDistanceFactor);
-		y = (float) (Distance.fastConversionGeopointsToMeters(geoObject.getLatitude() 
+		y = (float) (Distance.fastConversionGeopointsToMeters(location.latitude
 				- mWorld.getLatitude()) / mDistanceFactor);
 
 		if (mMaxDistanceSizePoints > 0 || mMinDistanceSizePoints > 0) {
@@ -650,7 +651,7 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 		if (beyondarObject instanceof GeoObject) {
 			dst = ((GeoObject) beyondarObject).calculateDistanceMeters(mWorld.getLongitude(),
 					mWorld.getLatitude());
-			convertGPStoPoint3((GeoObject) beyondarObject, beyondarObject.getPosition());
+			convertGPStoPoint3(((GeoObject) beyondarObject).getLocation(), beyondarObject.getPosition());
 		} else {
 			Point3 position = beyondarObject.getPosition();
 			dst = MathUtils.GLUnitsToMeters((float) Distance.calculateDistanceCoordinates(0, 0, 0,

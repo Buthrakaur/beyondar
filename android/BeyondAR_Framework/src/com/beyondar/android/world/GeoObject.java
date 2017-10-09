@@ -124,6 +124,10 @@ public class GeoObject extends BeyondarObject {
 		setGeoPosition(location.getLatitude(), location.getLongitude());
 	}
 
+	public GeoPoint getLocation(){
+		return new GeoPoint(mLatitude, mLongitude, mAltitude);
+	}
+
 	/**
 	 * Calculate the distance of this {@link com.beyondar.android.world.GeoObject GeoObject} from an other
 	 * {@link com.beyondar.android.world.GeoObject GeoObject}.
