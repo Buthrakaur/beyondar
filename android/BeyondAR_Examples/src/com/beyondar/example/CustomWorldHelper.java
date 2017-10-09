@@ -18,7 +18,11 @@ package com.beyondar.example;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import com.beyondar.android.world.GeoObject;
+import com.beyondar.android.world.GeoPoint;
+import com.beyondar.android.world.GeoPolylineObject;
 import com.beyondar.android.world.World;
+
+import java.util.Arrays;
 
 @SuppressLint("SdCardPath")
 public class CustomWorldHelper {
@@ -39,6 +43,13 @@ public class CustomWorldHelper {
 		// User position (you can change it using the GPS listeners form Android
 		// API)
 		sharedWorld.setGeoPosition(41.90533734214473d, 2.565848038959814d);
+
+		GeoPolylineObject gpl = new GeoPolylineObject(666);
+		gpl.setPolyline(Arrays.asList(
+				new GeoPoint(41.90553066234138d, 2.565777906882577d),
+				new GeoPoint(41.90596218466268d, 2.565250806050688d),
+				new GeoPoint(41.90550959641445d, 2.565873388087619d)));
+		gpl.setImageResource(R.drawable.object_stuff);
 
 		// Create an object with an image in the app resources.
 		GeoObject go1 = new GeoObject(1l);
@@ -106,6 +117,7 @@ public class CustomWorldHelper {
 		sharedWorld.addBeyondarObject(go8);
 		sharedWorld.addBeyondarObject(go9);
 		sharedWorld.addBeyondarObject(go10);
+		sharedWorld.addBeyondarObject(gpl);
 
 		return sharedWorld;
 	}
