@@ -131,28 +131,12 @@ public class GeoObject extends BeyondarObject {
 	/**
 	 * Calculate the distance of this {@link com.beyondar.android.world.GeoObject GeoObject} from an other
 	 * {@link com.beyondar.android.world.GeoObject GeoObject}.
-	 * 
+	 *
 	 * @param geo
 	 *            The other {@link com.beyondar.android.world.GeoObject GeoObject} to calculate the distance.
 	 * @return The distance in meters.
 	 */
-	public double calculateDistanceMeters(GeoObject geo) {
-		return calculateDistanceMeters(geo.getLongitude(), geo.getLatitude());
-	}
-
-	/**
-	 * Calculate the distance of this {@link com.beyondar.android.world.GeoObject GeoObject} from an other
-	 * {@link com.beyondar.android.world.GeoObject GeoObject}.
-	 * 
-	 * @param longitude
-	 *            The other {@link com.beyondar.android.world.GeoObject GeoObject} longitude to calculate the
-	 *            distance.
-	 * @param latitude
-	 *            The other {@link com.beyondar.android.world.GeoObject GeoObject} latitude to calculate the
-	 *            distance.
-	 * @return The distance in meters.
-	 */
-	public double calculateDistanceMeters(double longitude, double latitude) {
-		return Distance.calculateDistanceMeters(getLongitude(), getLatitude(), longitude, latitude);
+	public double calculateDistanceMeters(GeoPoint geo) {
+		return getLocation().calculateDistanceMeters(geo);
 	}
 }

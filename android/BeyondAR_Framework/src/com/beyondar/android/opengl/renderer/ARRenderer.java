@@ -59,6 +59,7 @@ import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.BeyondarObjectList;
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.GeoPoint;
+import com.beyondar.android.world.GeoPolylineObject;
 import com.beyondar.android.world.World;
 
 // Some references:
@@ -648,9 +649,13 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 			return;
 		}
 		double dst = 0;
-		if (beyondarObject instanceof GeoObject) {
-			dst = ((GeoObject) beyondarObject).calculateDistanceMeters(mWorld.getLongitude(),
-					mWorld.getLatitude());
+		if (beyondarObject instanceof GeoPolylineObject){
+			dst = ((GeoPolylineObject) beyondarObject).calculateDistanceMeters(mWorld.getLocation());
+			//TOOD: convert location of each point
+			convertGPStoPoint3(((GeoObject) beyondarObject).getLocation(), beyondarObject.getPosition());
+		}
+		else if (beyondarObject instanceof GeoObject) {
+			dst = ((GeoObject) beyondarObject).calculateDistanceMeters(mWorld.getLocation());
 			convertGPStoPoint3(((GeoObject) beyondarObject).getLocation(), beyondarObject.getPosition());
 		} else {
 			Point3 position = beyondarObject.getPosition();

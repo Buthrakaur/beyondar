@@ -16,6 +16,7 @@
 package com.beyondar.android.util.math;
 
 import com.beyondar.android.world.GeoObject;
+import com.beyondar.android.world.GeoPoint;
 
 //http://www.movable-type.co.uk/scripts/latlong.html
 /**
@@ -74,9 +75,8 @@ public class Distance {
 		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + Math.pow(z1 - z2, 2));
 	}
 
-	public static double calculateDistanceMeters(GeoObject objA, GeoObject objB) {
-		return calculateDistanceMeters(objA.getLongitude(), objA.getLatitude(), objB.getLongitude(),
-				objB.getLatitude());
+	public static double calculateDistanceMeters(GeoPoint objA, GeoPoint objB) {
+		return calculateDistanceMeters(objA.longitude, objA.latitude, objB.longitude, objB.latitude);
 	}
 
 	public static double calculateDistanceMeters(double aLong, double aLat, double bLong, double bLat) {

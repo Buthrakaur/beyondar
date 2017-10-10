@@ -320,6 +320,10 @@ public class World implements Plugable<WorldPlugin> {
 		return mLatitude;
 	}
 
+	public GeoPoint getLocation(){
+		return new GeoPoint(mLatitude, mLongitude, mAltitude);
+	}
+
 	/**
 	 * Set user geo position.
 	 * 
