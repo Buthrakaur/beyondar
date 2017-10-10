@@ -1,5 +1,6 @@
 package com.beyondar.android.world;
 
+import com.beyondar.android.opengl.renderable.PolylineRenderable;
 import com.beyondar.android.opengl.renderable.Renderable;
 import com.beyondar.android.util.math.geom.Point3;
 
@@ -43,6 +44,6 @@ public class GeoPolylineObject extends GeoObject {
 
     @Override
     protected Renderable createRenderable() {
-        return super.createRenderable();
+        return PolylineRenderable.getInstance();
     }
 }

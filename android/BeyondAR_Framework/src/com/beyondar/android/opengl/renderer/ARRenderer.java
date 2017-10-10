@@ -791,7 +791,7 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 		 */
 		gl.glDisable(GL10.GL_DITHER);
 
-		gl.glEnable(GL10.GL_TEXTURE_2D); // Enable Texture Mapping ( NEW )
+		//gl.glEnable(GL10.GL_TEXTURE_2D); // Enable Texture Mapping ( NEW )
 		gl.glShadeModel(GL10.GL_SMOOTH); // Enable Smooth Shading
 		gl.glClearDepthf(1.0f); // Depth Buffer Setup
 		gl.glEnable(GL10.GL_DEPTH_TEST); // Enables Depth Testing

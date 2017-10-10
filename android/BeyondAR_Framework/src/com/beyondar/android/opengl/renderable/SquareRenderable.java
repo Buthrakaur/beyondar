@@ -32,13 +32,13 @@ public class SquareRenderable implements Renderable {
 	private static SquareRenderable mThis;
 
 	private Texture mTexture;
-	private BeyondarObject mBeyondarObject;
+	protected BeyondarObject mBeyondarObject;
 	private Point3 mAngle;
 	private Point3 mPosition;
 
 	private long mTimeMark;
 
-	private SquareRenderable() {
+	protected SquareRenderable() {
 		mAngle = new Point3();
 		mPosition = new Point3();
 		mTexture = new Texture();
@@ -78,6 +78,8 @@ public class SquareRenderable implements Renderable {
 
 		mTexture = mBeyondarObject.getTexture();
 		Texture texture = mTexture;
+
+		gl.glEnable(GL10.GL_TEXTURE_2D);
 
 		gl.glTranslatef(mPosition.x, mPosition.y, mPosition.z);
 
@@ -121,6 +123,8 @@ public class SquareRenderable implements Renderable {
 		gl.glRotatef((float) mAngle.z, 0, 0, -1);
 
 		gl.glTranslatef(-mPosition.x, -mPosition.y, -mPosition.z);
+
+		gl.glDisable(GL10.GL_TEXTURE_2D);
 	}
 
 	@Override
