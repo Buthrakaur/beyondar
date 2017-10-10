@@ -434,10 +434,8 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 	 * @param location
 	 *            The {@link com.beyondar.android.world.GeoObject GeoObject} to
 	 *            be processed.
-	 * @param out
-	 *            Where the results be stored.
 	 */
-	protected void convertGPStoPoint3(GeoPoint location, Point3 out) {
+	protected Point3 convertGPStoPoint3(GeoPoint location) {
 		float x, z, y;
 		x = (float) (Distance.fastConversionGeopointsToMeters(location.longitude
 				- mWorld.getLongitude()) / mDistanceFactor);
@@ -464,9 +462,7 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 			}
 		}
 
-		out.x = x;
-		out.y = y;
-		out.z = z;
+		return new Point3(x, y, z);
 	}
 
 	/**
@@ -650,13 +646,20 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 		}
 		double dst = 0;
 		if (beyondarObject instanceof GeoPolylineObject){
-			dst = ((GeoPolylineObject) beyondarObject).calculateDistanceMeters(mWorld.getLocation());
-			//TOOD: convert location of each point
-			convertGPStoPoint3(((GeoObject) beyondarObject).getLocation(), beyondarObject.getPosition());
+			GeoPolylineObject polyline = (GeoPolylineObject) beyondarObject;
+			dst = polyline.calculateDistanceMeters(mWorld.getLocation());
+
+			polyline.setPosition(convertGPStoPoint3(polyline.getLocation()));
+
+			List<Point3> points = new ArrayList<>();
+			for (GeoPoint p: polyline.polyline) {
+				points.add(convertGPStoPoint3(p));
+			}
+			polyline.setPositions(points);
 		}
 		else if (beyondarObject instanceof GeoObject) {
 			dst = ((GeoObject) beyondarObject).calculateDistanceMeters(mWorld.getLocation());
-			convertGPStoPoint3(((GeoObject) beyondarObject).getLocation(), beyondarObject.getPosition());
+			beyondarObject.setPosition(convertGPStoPoint3(((GeoObject) beyondarObject).getLocation()));
 		} else {
 			Point3 position = beyondarObject.getPosition();
 			dst = MathUtils.GLUnitsToMeters((float) Distance.calculateDistanceCoordinates(0, 0, 0,

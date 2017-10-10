@@ -25,7 +25,7 @@ public class GeoPolylineObject extends GeoObject {
         return distance;
     }
 
-    private List<GeoPoint> polyline;
+    public List<GeoPoint> polyline;
 
     public void setPolyline(List<GeoPoint> points){
         if (points.size() > 0 && getLatitude() == 0 && getLongitude() == 0){
@@ -35,10 +35,10 @@ public class GeoPolylineObject extends GeoObject {
         polyline = Collections.unmodifiableList(points);
     }
 
-    private List<Point3> pointPositions;
+    public List<Point3> positions;
 
     public void setPositions(List<Point3> points){
-        pointPositions = points;
+        positions = points;
     }
 
     @Override
