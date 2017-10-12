@@ -17,12 +17,16 @@ package com.beyondar.example;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.GeoPoint;
 import com.beyondar.android.world.GeoPolylineObject;
 import com.beyondar.android.world.World;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @SuppressLint("SdCardPath")
 public class CustomWorldHelper {
@@ -44,12 +48,6 @@ public class CustomWorldHelper {
 		// API)
 		sharedWorld.setGeoPosition(41.90533734214473d, 2.565848038959814d);
 
-		GeoPolylineObject gpl = new GeoPolylineObject(666);
-		gpl.setPolyline(Arrays.asList(
-				new GeoPoint(41.90553066234138d, 2.565777906882577d),
-				new GeoPoint(41.90596218466268d, 2.565250806050688d),
-				new GeoPoint(41.90550959641445d, 2.565873388087619d)));
-		gpl.setImageResource(R.drawable.object_stuff);
 
 		// Create an object with an image in the app resources.
 		GeoObject go1 = new GeoObject(1l);
@@ -105,7 +103,24 @@ public class CustomWorldHelper {
 		go10.setGeoPosition(42.006667d, 2.705d);
 		go10.setImageResource(R.drawable.object_stuff);
 		go10.setName("Far away");
-		
+
+		GeoPolylineObject gpl = new GeoPolylineObject(666);
+		GeoPoint[] points = {
+				go1.getLocation(),
+				go2.getLocation(),
+				go3.getLocation(),
+				go4.getLocation(),
+				go5.getLocation(),
+				go6.getLocation(),
+				go8.getLocation(),
+				go9.getLocation(),
+				go10.getLocation(),
+		};
+
+		gpl.setPolyline(Arrays.asList(points));
+		gpl.setColor(Color.YELLOW);
+
+
 		// Add the GeoObjects to the world
 		sharedWorld.addBeyondarObject(go1);
 		sharedWorld.addBeyondarObject(go2, LIST_TYPE_EXAMPLE_1);

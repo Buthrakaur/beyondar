@@ -1,5 +1,7 @@
 package com.beyondar.android.opengl.renderable;
 
+import android.graphics.Color;
+
 import com.beyondar.android.opengl.texture.Texture;
 import com.beyondar.android.util.math.geom.Plane;
 import com.beyondar.android.util.math.geom.Point3;
@@ -42,23 +44,16 @@ public class PolylineRenderable extends SquareRenderable {
         gl.glRotatef(angle.y, 0, 1, 0);
         gl.glRotatef(angle.z, 0, 0, 1);
 
-
         // Enabled the vertices buffer for writing and to be used during rendering.
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 
-        float vertices[] = {
-                -1.0f, 0.0f, -1.0f, // V1 - bottom left
-                -1.0f, 0.0f, 1.0f, // V2 - top left
-                1.0f, 0.0f, -1.0f, // V3 - bottom right
-                1.0f, 0.0f, 1.0f // V4 - top right
-        };
-                /*new float[3*polyline.positions.size()];
+        float vertices[] = new float[3*polyline.positions.size()];
         for (int i = 0; i < polyline.positions.size(); i++) {
             Point3 point = polyline.positions.get(i);
             vertices[3*i] = point.x;
             vertices[3*i + 1] = point.y;
             vertices[3*i + 2] = point.z;
-        }*/
+        }
 
         FloatBuffer vertexBuffer;
         // a float is 4 bytes, therefore we multiply the number of vertices with 4.
@@ -68,7 +63,8 @@ public class PolylineRenderable extends SquareRenderable {
         vertexBuffer.put(vertices);
         vertexBuffer.position(0);
 
-        gl.glColor4f(0, 1, 0, 1);
+        int color = polyline.color;
+        gl.glColor4f(Color.red(color) / 255f, Color.green(color) / 255f,Color.blue(color) / 255f, Color.alpha(color) / 255f);
         gl.glLineWidth(10);
 
         // Set the face rotation

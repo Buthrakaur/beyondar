@@ -1,5 +1,7 @@
 package com.beyondar.android.world;
 
+import android.graphics.Color;
+
 import com.beyondar.android.opengl.renderable.PolylineRenderable;
 import com.beyondar.android.opengl.renderable.Renderable;
 import com.beyondar.android.util.math.geom.Point3;
@@ -45,5 +47,11 @@ public class GeoPolylineObject extends GeoObject {
     @Override
     protected Renderable createRenderable() {
         return PolylineRenderable.getInstance();
+    }
+
+    public int color = Color.GREEN;
+
+    public void setColor(int color){
+        this.color = color;
     }
 }

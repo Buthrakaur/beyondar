@@ -805,6 +805,8 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 		// Function For
 		// Translucency
 
+		gl.glEnable(GL10.GL_MULTISAMPLE); //enable anti-alias
+
 		gl.glEnable(GL10.GL_ALPHA_TEST);
 		gl.glAlphaFunc(GL10.GL_NOTEQUAL, 0);
 
